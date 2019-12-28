@@ -1,0 +1,13 @@
+[Unit]
+Description=PixelDust
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/pi/Adafruit_PixelDust/raspberry_pi
+ExecStart=/home/pi/Adafruit_PixelDust/raspberry_pi/newbuttons.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

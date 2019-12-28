@@ -15,7 +15,8 @@
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
 
-#define LIS3DH_DEFAULT_ADDRESS 0x18
+// #define LIS3DH_DEFAULT_ADDRESS 0x18
+#define LIS3DH_DEFAULT_ADDRESS 0x19
 
 // Return codes for the begin() function:
 #define LIS3DH_OK            0 ///< Success!

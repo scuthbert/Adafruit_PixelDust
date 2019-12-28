@@ -14,6 +14,8 @@
 #include "led-matrix-c.h"
 #include "lis3dh.h"
 #include <signal.h>
+#include <stdlib.h> 
+#include <time.h>
 
 #define N_GRAINS 800 ///< Number of sand grains on 64x64 matrix
 
@@ -88,6 +90,12 @@ int main(int argc, char **argv) {
 
 	sand->randomize(); // Initialize random sand positions
 
+	// Randomize hourglass color when reset
+	srand (time(NULL));
+	uint8_t red = rand() % 255;
+	uint8_t blue = rand() % 255;
+	uint8_t green = rand() % 255;
+
 	while(running) {
 		// Read accelerometer...
 		lis3dh.accelRead(&xx, &yy, &zz);
@@ -108,15 +116,15 @@ int main(int argc, char **argv) {
 			  ((double)width / 4.0 - 1.0) + 0.5);
 			for(x=0; x<=w; x++) {
 				led_canvas_set_pixel(canvas, x, i,
-				  32, 32, 96);    // Left
-				led_canvas_set_pixel(canvas, width-1-x,
-				  i, 32, 32, 96); // Right
+				  4*x, 4*x, 4*x);
+				led_canvas_set_pixel(canvas, width-1-x, i,
+				  4*x, 4*x, 4*x);
 			}
 		}
 		for(i=0; i<nGrains; i++) { // Sand...
 			sand->getPosition(i, &x, &y);
 			led_canvas_set_pixel(canvas,
-			  x, y, 200, 200, 100);
+			  x, y, 4*x, 4*y, 0);//200, 200, 100);
 		}
 
 		// Update matrix contents on next vertical sync

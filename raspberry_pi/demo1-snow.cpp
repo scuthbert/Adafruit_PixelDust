@@ -14,7 +14,7 @@
 #include "lis3dh.h"
 #include <signal.h>
 
-#define N_FLAKES 900 ///< Number of snowflakes on 64x64 matrix
+#define N_FLAKES 512 ///< Number of snowflakes on 64x64 matrix
 
 struct RGBLedMatrix *matrix  = NULL;
 Adafruit_LIS3DH      lis3dh;
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 		for(i=0; i<nFlakes; i++) {
 			snow->getPosition(i, &x, &y);
 			led_canvas_set_pixel(canvas,
-			  x, y, 255, 255, 255);
+			  x, y, 4*x, 4*y, 2*x*y);
 		}
 
 		// Update matrix contents on next vertical sync
